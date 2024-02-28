@@ -1,0 +1,928 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>openDuT</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="user-manual/index.html"><strong aria-hidden="true">1.</strong> User Manual</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-manual/cleo/index.html"><strong aria-hidden="true">1.1.</strong> CLEO</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user-manual/cleo/commands.html"><strong aria-hidden="true">1.1.1.</strong> Commands</a></li><li class="chapter-item expanded "><a href="user-manual/cleo/jq.html"><strong aria-hidden="true">1.1.2.</strong> How to combine CLEO and jq</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="development/index.html"><strong aria-hidden="true">2.</strong> Developer Manual</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/getting-started.html"><strong aria-hidden="true">2.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="development/starting-applications.html"><strong aria-hidden="true">2.2.</strong> Starting Applications</a></li><li class="chapter-item expanded "><a href="development/building-a-release.html"><strong aria-hidden="true">2.3.</strong> Building a Release</a></li><li class="chapter-item expanded "><a href="development/testenv/index.html"><strong aria-hidden="true">2.4.</strong> Test Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="development/testenv/theo-setup-vm-linux.html"><strong aria-hidden="true">2.4.1.</strong> Setup openDuT VM on Linux</a></li><li class="chapter-item expanded "><a href="development/testenv/theo-setup-vm-windows.html"><strong aria-hidden="true">2.4.2.</strong> Setup openDuT VM on Windows</a></li><li class="chapter-item expanded "><a href="development/testenv/theo-setup-docker.html"><strong aria-hidden="true">2.4.3.</strong> Setup Docker</a></li><li class="chapter-item expanded "><a href="development/testenv/theo-use-development-mode.html"><strong aria-hidden="true">2.4.4.</strong> Usage Development Mode</a></li><li class="chapter-item expanded "><a href="development/testenv/theo-use-test-mode.html"><strong aria-hidden="true">2.4.5.</strong> Usage Test Mode</a></li><li class="chapter-item expanded "><a href="development/testenv/known-issues.html"><strong aria-hidden="true">2.4.6.</strong> Known Issues</a></li><li class="chapter-item expanded "><a href="development/testenv/advanced.html"><strong aria-hidden="true">2.4.7.</strong> Advanced</a></li><li class="chapter-item expanded "><a href="development/testenv/secret-scanner.html"><strong aria-hidden="true">2.4.8.</strong> Secret Scanner</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="architecture/index.html"><strong aria-hidden="true">3.</strong> Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="architecture/cluster/index.html"><strong aria-hidden="true">3.1.</strong> Cluster</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="architecture/cluster/deployment.html"><strong aria-hidden="true">3.1.1.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="architecture/peer/index.html"><strong aria-hidden="true">3.2.</strong> Peer</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">openDuT</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="eclipse-opendut"><a class="header" href="#eclipse-opendut">Eclipse openDuT</a></h1>
+<p>Eclipse openDuT provides an open framework to automate the testing and validation process for automotive software and applications in a reliable, repeatable and observable way. Eclipse openDuT is hardware-agnostic with respect to the execution environment and accompanies different hardware interfaces and standards regarding the usability of the framework. Thereby, it is supporting both on-premise installations and hosting in a cloud infrastructure. Eclipse openDuT considers an eventually distributed network of real (HIL) and virtual devices (SIL) under test. Eclipse openDuT reflects hardware capabilities and constraints along with the chosen test method. Test cases are not limited to a specific domain, but it especially realizes functional and explorative security tests.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="user-manual"><a class="header" href="#user-manual">User Manual</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="user-manual-for-cleo"><a class="header" href="#user-manual-for-cleo">User Manual for CLEO</a></h1>
+<p>CLEO is a CLI tool to create/read/update/delete resources in CARL.</p>
+<p>By using a terminal you'll be able to configure your resources via CLEO.</p>
+<p>CLEO can currently access the following resources:</p>
+<ul>
+<li>ClusterConfigurations</li>
+<li>ClusterDeployments</li>
+<li>Peers</li>
+<li>DuTs</li>
+</ul>
+<p>Every resource can be created, listed, described and deleted.
+Some have additional features such as an option to generate a setup-key or search through them.</p>
+<p>In general, CLEO offers a <code>help</code> command to display usage information about a command. Just use <code>cleo help</code> or <code>cleo &lt;subcommand&gt; --help</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands</a></h1>
+<h2 id="listing-resources"><a class="header" href="#listing-resources">Listing resources</a></h2>
+<p>To list resources you can decide whether to display the resources in a table or in JSON-format.
+The default output format is a table which is displayed by not using the <code>--output</code> flag.</p>
+<pre><code>cleo list --output=&lt;format&gt; &lt;openDuT-resource&gt;
+</code></pre>
+<h2 id="creating-resources"><a class="header" href="#creating-resources">Creating resources</a></h2>
+<p>To create resources it depends on the resource whether an ID or connected devices have to be added to the command.</p>
+<pre><code>cleo create &lt;resource&gt;
+</code></pre>
+<h2 id="generating-peersetup-strings"><a class="header" href="#generating-peersetup-strings">Generating PeerSetup Strings</a></h2>
+<p>To create a PeerSetup, providing the PeerID of the peer to be set up is necessary:</p>
+<pre><code>cleo generate-setup-key --id &lt;PeerID&gt;
+</code></pre>
+<h2 id="decoding-setup-strings"><a class="header" href="#decoding-setup-strings">Decoding Setup Strings</a></h2>
+<pre><code>cleo decode --setup-string &lt;String&gt;
+</code></pre>
+<h2 id="describing-resources"><a class="header" href="#describing-resources">Describing resources</a></h2>
+<p>To describe a resource, their ID is to be provided. The output can be displayed via text or JSON-format.</p>
+<pre><code>cargo cleo describe --output=&lt;output format&gt; &lt;resource&gt; --id 
+</code></pre>
+<h2 id="finding-resources"><a class="header" href="#finding-resources">Finding resources</a></h2>
+<p>Wildcards such as '*' can be used to find resources.</p>
+<pre><code>cleo find &lt;resource&gt; &quot;&lt;at least search criteria&gt;&quot;
+</code></pre>
+<h2 id="delete-resources"><a class="header" href="#delete-resources">Delete resources</a></h2>
+<pre><code>cleo delete &lt;resource&gt; --id &lt;ID of resource&gt;
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="cleo-and-jq"><a class="header" href="#cleo-and-jq">CLEO and jq</a></h2>
+<p>jq is a command-line-tool to pipe outputs from json into pretty json or extract values.
+That's how jq can automate cli-applications.</p>
+<h4 id="basic-jq"><a class="header" href="#basic-jq">Basic jq</a></h4>
+<p>jq -r removes &quot; from strings.
+[] constructs array
+object constructor: {} e.g. <code>jq  '[ { &quot;name:&quot; .[].name, &quot;id:&quot; .[].id } ]'</code> or: <code>jq '[ .[] | { title, name } ]'</code></p>
+<p><strong>input</strong></p>
+<pre><code class="language-shell"> cleo list --output=json peers
+</code></pre>
+<p><strong>output</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;name&quot;: &quot;HelloPeer&quot;,
+    &quot;id&quot;: &quot;90dfc639-4b4a-4bbb-bad3-6f037fcde013&quot;,
+    &quot;status&quot;: &quot;Disconnected&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Edgar&quot;,
+    &quot;id&quot;: &quot;defe10bb-a12a-4ad9-b18e-8149099dd044&quot;,
+    &quot;status&quot;: &quot;Connected&quot;
+  },
+  {
+    &quot;name&quot;: &quot;SecondPeer&quot;,
+    &quot;id&quot;: &quot;c3333d4e-9b1a-4db5-9bfa-7a0a40680f1a&quot;,
+    &quot;status&quot;: &quot;Disconnected&quot;
+  }
+]
+</code></pre>
+<p><strong>input</strong></p>
+<pre><code class="language-shell">cleo list --output=json peers | jq '[.[].name]'
+</code></pre>
+<p><strong>output</strong><br />
+jq extracts the names of every json element in the list of peers.</p>
+<pre><code class="language-json">[
+  &quot;HelloPeer&quot;,
+  &quot;Edgar&quot;, 
+  &quot;SecondPeer&quot; 
+]
+</code></pre>
+<p>can also be put into an array with <code>cleo list --output=json peers | jq '[.[].name']</code></p>
+<p><strong>input</strong></p>
+<pre><code class="language-shell">cleo list --output=json peers | jq '[.[] | select(.status==&quot;Disconnected&quot;)]'
+</code></pre>
+<p><strong>output</strong></p>
+<pre><code class="language-json">[
+    {
+      &quot;name&quot;: &quot;HelloPeer&quot;,
+      &quot;id&quot;: &quot;90dfc639-4b4a-4bbb-bad3-6f037fcde013&quot;,
+      &quot;status&quot;: &quot;Disconnected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;SecondPeer&quot;,
+      &quot;id&quot;: &quot;c3333d4e-9b1a-4db5-9bfa-7a0a40680f1a&quot;,
+      &quot;status&quot;: &quot;Disconnected&quot;
+    }
+]
+</code></pre>
+<p><strong>input</strong></p>
+<pre><code class="language-shell">cleo list --output=json peers | jq '.[] | select(.status==&quot;Connected&quot;) | .id' | xargs -I{} cleo describe peer -i {}
+</code></pre>
+<p><strong>output</strong></p>
+<pre><code>Peer: Edgar
+  Id: defe10bb-a12a-4ad9-b18e-8149099dd044
+  Devices: [device-1, The Device, Another Device, Fubar Device, Lost Device]
+</code></pre>
+<p><strong>to get the number of the peers</strong></p>
+<pre><code class="language-shell">cleo list --output=json peers | jq 'length'
+</code></pre>
+<p><strong>to sort peers by name</strong></p>
+<pre><code class="language-shell">cleo list --output=json peers | jq 'sort_by(.name)'
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="developer-manual"><a class="header" href="#developer-manual">Developer Manual</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
+<h2 id="development-setup"><a class="header" href="#development-setup">Development Setup</a></h2>
+<p>Install the Rust toolchain: <a href="https://www.rust-lang.org/tools/install">https://www.rust-lang.org/tools/install</a></p>
+<p>You may need additional dependencies. On Ubuntu/Debian, these can be installed with:</p>
+<pre><code class="language-sh">sudo apt install build-essential pkg-config libssl-dev
+</code></pre>
+<p>To see if your development setup is generally working, you can run <code>cargo ci check</code> in the project directory.<br />
+Mind that this runs the unit tests and additional code checks and may occasionally show warnings/errors related to those, rather than pure build errors.</p>
+<h2 id="tips--tricks"><a class="header" href="#tips--tricks">Tips &amp; Tricks</a></h2>
+<ul>
+<li>
+<p><code>cargo ci</code> contains many utilities for development in general.</p>
+</li>
+<li>
+<p>To view this documentation fully rendered, run <code>cargo ci doc book open</code>.</p>
+</li>
+<li>
+<p>To have your code validated more extensively, e.g. before publishing your changes, run <code>cargo ci check</code>.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="starting-applications"><a class="header" href="#starting-applications">Starting Applications</a></h1>
+<ul>
+<li>Run CARL (backend):
+<pre><code class="language-sh">cargo carl
+</code></pre>
+</li>
+</ul>
+<p>You can then open the UI by going to https://localhost:8080/ in your web browser.</p>
+<ul>
+<li>
+<p>Run CLEO (CLI for managing CARL):</p>
+<pre><code class="language-sh">cargo cleo
+</code></pre>
+</li>
+<li>
+<p>Run EDGAR (edge software):</p>
+<pre><code class="language-sh">cargo edgar service
+</code></pre>
+<p>Mind that this is in a somewhat broken state and may be removed in the future,<br />
+as it's normally necessary to add the peer in CARL and then go through <code>edgar setup</code>.<br />
+For a more realistic environment, see <a href="development/testenv/_chapter">test-environment</a>.</p>
+</li>
+</ul>
+<h2 id="ui-development"><a class="header" href="#ui-development">UI Development</a></h2>
+<p>Run <code>cargo lea</code> to continuously build the newest changes in the LEA codebase.<br />
+Then you can simply refresh your browser to see them.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-a-release"><a class="header" href="#building-a-release">Building a Release</a></h1>
+<p>To build release artifacts for distribution, run:</p>
+<pre><code class="language-sh">cargo ci distribution
+</code></pre>
+<p>The artifacts are placed under <code>target/ci/distribution/</code>.</p>
+<h2 id="alternative-platform"><a class="header" href="#alternative-platform">Alternative platform</a></h2>
+<p>If you want to build artifacts for a different platform, use the following:</p>
+<pre><code class="language-sh">cargo ci distribution --target armv7-unknown-linux-gnueabihf
+</code></pre>
+<p>The currently supported target platforms are:</p>
+<ul>
+<li>x86_64-unknown-linux-gnu</li>
+<li>armv7-unknown-linux-gnueabihf</li>
+<li>aarch64-unknown-linux-gnu</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="test-environment"><a class="header" href="#test-environment">Test Environment</a></h1>
+<p>openDuT can be tricky to test, as it needs to modify the operating system to function and supports networking in a distributed setup.<br />
+To aid in this, we offer a virtualized test environment for development.<br />
+This test environment is set up with the help of a command line tool called <code>theo</code>.
+THEO stands for <strong>Test Harness Environment Operator</strong>.</p>
+<p>It is recommended to start everything in a virtual machine, but you may also start the service on the host with <code>docker compose</code> if applicable.
+Setup of the virtual machine is done with Vagrant, Virtualbox and Ansible.
+The following services are included in docker:</p>
+<ul>
+<li>carl</li>
+<li>edgar</li>
+<li>firefox container for UI testing (accessible via http://localhost:3000) 
+<ul>
+<li>includes certificate authorities and is running in headless mode</li>
+<li>is running in same network as carl and edgar (working DNS resolution!)</li>
+</ul>
+</li>
+<li>netbird</li>
+<li>keycloak</li>
+</ul>
+<h2 id="operational-modes"><a class="header" href="#operational-modes">Operational modes</a></h2>
+<p>There are two ways of operation for the test environment:</p>
+<h3 id="test-mode"><a class="header" href="#test-mode">Test mode</a></h3>
+<p>Run everything in Docker (Either on your host or preferable in a virtual machine).
+You may use the <strong>OpenDuT Browser</strong> to access the services.
+The OpenDuT Browser is a web browser running in a docker container in the same network as the other services.
+All certificates are pre-installed and the browser is running in headless mode.
+It is accessible from your host via http://localhost:3000.</p>
+<p><img src="development/testenv/img/opendut-vm-user.drawio.svg" alt="OpenDuT-VM" /></p>
+<h3 id="development-mode"><a class="header" href="#development-mode">Development mode</a></h3>
+<p>Run CARL on the host in your development environment of choice and the rest in Docker.
+In this case there is a proxy running in the docker environment. 
+It works as a drop-in replacement for CARL in the docker environment, which is forwarding the traffic to CARL running in an integrated development environment on the host.</p>
+<p><img src="development/testenv/img/opendut-vm-development.drawio.svg" alt="OpenDuT-VM" /></p>
+<h2 id="getting-started-1"><a class="header" href="#getting-started-1">Getting started</a></h2>
+<p>Set up the virtual machine</p>
+<ul>
+<li>on <a href="development/testenv/theo-setup-vm-windows.html">Windows</a></li>
+<li>on <a href="development/testenv/theo-setup-vm-linux.html">Linux</a></li>
+</ul>
+<p>Then you may start the test environment in the virtual machine.</p>
+<ul>
+<li>And use it in <a href="development/testenv/theo-use-test-mode.html">test mode</a></li>
+<li>Or use it in <a href="development/testenv/theo-use-development-mode.html">development mode</a>.</li>
+</ul>
+<p>There are some known issues with the test environment (most of them on Windows): </p>
+<ul>
+<li><a href="development/testenv/known-issues.html">known issues section</a></li>
+</ul>
+<h2 id="start-testing"><a class="header" href="#start-testing">Start testing</a></h2>
+<p>Once you have set up and started the test environment, you may start testing the services.</p>
+<h3 id="user-interface"><a class="header" href="#user-interface">User interface</a></h3>
+<p>The <strong>OpenDuT Browser</strong> is a web browser running in a docker container.
+It is based on KasmVNC base image which allows containerized desktop applications from a web browser.
+A port forwarding is in place to access the browser from your host.
+It has all the necessary certificates pre-installed and is running in headless mode.
+You may use this <strong>OpenDuT Browser</strong> to access the services.</p>
+<ul>
+<li>Open following address in your browser: http://localhost:3000</li>
+<li>Usernames for test environment:
+<ul>
+<li>LEA: opendut:opendut</li>
+<li>Keycloak: admin:admin123456</li>
+<li>Netbird: netbird:netbird</li>
+</ul>
+</li>
+<li>Services with user interface:
+<ul>
+<li>https://carl</li>
+<li>https://netbird-dashboard</li>
+<li>https://keycloak</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="theo-setup-in-vagrant"><a class="header" href="#theo-setup-in-vagrant">THEO Setup in Vagrant</a></h1>
+<p>You may run all the containers in a virtual machine, using Vagrant.
+This is the recommended way to run the test environment.
+It will create a private network (subnet 192.168.56.0/24).
+The virtual machine itself has the IP address: <code>192.168.56.10</code>.
+The docker network has the IP subnet: <code>192.168.32.0/24</code>.
+Make sure those network addresses are not occupied or in conflict with other networks accessible from your machine.</p>
+<p><img src="development/testenv/..%2F..%2F..%2F..%2Fresources%2Fdiagrams%2Fopendut-vm-user.drawio.svg" alt="OpenDuT-VM" /></p>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
+<ul>
+<li>
+<p>Install Vagrant</p>
+<p><em>Ubuntu / Debian</em></p>
+<pre><code class="language-sh">sudo apt install vagrant
+</code></pre>
+<p>On most other Linux distributions, the package is called <code>vagrant</code>.</p>
+</li>
+<li>
+<p>Install VirtualBox (see https://www.virtualbox.org)</p>
+<pre><code class="language-sh">sudo apt install virtualbox
+</code></pre>
+</li>
+<li>
+<p>Create or check if an ssh key pair is present in <code>~/.ssh/id_rsa</code></p>
+<pre><code class="language-sh">mkdir -p ~/.ssh
+ssh-keygen -t rsa -b 4096 -C &quot;opendut-vm&quot; -f ~/.ssh/id_rsa
+</code></pre>
+</li>
+</ul>
+<h2 id="setup-virtual-machine"><a class="header" href="#setup-virtual-machine">Setup virtual machine</a></h2>
+<ul>
+<li>Either via cargo:
+<pre><code>cargo theo vagrant up
+</code></pre>
+</li>
+<li>Login to the virtual machine
+<pre><code>cargo theo vagrant ssh
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p><strong>Warning</strong>
+Within the VM the rust target directory is overridden to <code>/home/vagrant/rust-target</code> to avoid hard linking issues.
+When running cargo within the VM, output will be placed in this directory!</p>
+</blockquote>
+<ul>
+<li>
+<p>Ensure a distribution of openDuT is present</p>
+<ul>
+<li>By either creating one yourself (on the host)
+<pre><code class="language-sh">cargo ci distribution
+</code></pre>
+</li>
+<li>Or by copying one to the target directory <code>target/ci/distribution/x86_64-unknown-linux-gnu/</code>
+<pre><code class="language-sh">mkdir -p target/ci/distribution/x86_64-unknown-linux-gnu/
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Start test environment</p>
+<pre><code>cargo theo testenv start
+</code></pre>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setup-theo-on-windows"><a class="header" href="#setup-theo-on-windows">Setup THEO on Windows</a></h1>
+<p>This guide will help you set up THEO on Windows.</p>
+<h2 id="requirements-1"><a class="header" href="#requirements-1">Requirements</a></h2>
+<p>The following instructions use chocolatey to install the required software. 
+If you don't have chocolatey installed, you can find the installation instructions <a href="https://chocolatey.org/install">here</a>.
+You may also install the required software manually.</p>
+<ul>
+<li>Install vagrant and virtualbox
+<pre><code class="language-sh">choco install -y vagrant virtualbox
+</code></pre>
+</li>
+<li>Install git and configure git to respect line endings
+<pre><code class="language-sh">choco install git.install --params &quot;'/GitAndUnixToolsOnPath /WindowsTerminal /NoAutoCrlf'&quot;
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p><strong>Warning</strong>
+If you already have installed git, you may need to reconfigure it to respect line endings.
+If you already have checked out the repository without this setting, you need to do it again.</p>
+</blockquote>
+<ul>
+<li>
+<p>Redo git configuration</p>
+<pre><code class="language-sh">git config --global core.autocrlf false
+</code></pre>
+</li>
+<li>
+<p>Create or check if an ssh key pair is present in <code>~/.ssh/id_rsa</code></p>
+<pre><code class="language-sh">mkdir -p ~/.ssh
+ssh-keygen -t rsa -b 4096 -C &quot;opendut-vm&quot; -f ~/.ssh/id_rsa
+</code></pre>
+</li>
+</ul>
+<h2 id="setup-virtual-machine-1"><a class="header" href="#setup-virtual-machine-1">Setup virtual machine</a></h2>
+<ul>
+<li>Add the following environment variables to point vagrant to the vagrant file
+<pre><code class="language-sh">export OPENDUT_REPO_ROOT=$(git rev-parse --show-toplevel)
+export VAGRANT_DOTFILE_PATH=$OPENDUT_REPO_ROOT/.vagrant
+export VAGRANT_VAGRANTFILE=$OPENDUT_REPO_ROOT/.ci/docker/Vagrantfile
+</code></pre>
+</li>
+<li>Set up the vagrant box (following commands were tested in git-bash)</li>
+</ul>
+<pre><code class="language-sh">vagrant up
+</code></pre>
+<blockquote>
+<p><strong>Info</strong>
+If the virtual machine is not allowed to create or use a private network you may disable it by setting the environment variable <code>OPENDUT_DISABLE_PRIVATE_NETWORK=true</code>.</p>
+</blockquote>
+<ul>
+<li>Connect to the virtual machine via ssh (requires the environment variables)</li>
+</ul>
+<pre><code class="language-sh">vagrant ssh
+</code></pre>
+<h2 id="custom-root-certificate-authority"><a class="header" href="#custom-root-certificate-authority">Custom root certificate authority</a></h2>
+<p>Provision the virtual machine when running behind an intercepting http proxy and when the private network is disabled.</p>
+<pre><code class="language-sh">export CUSTOM_ROOT_CA=resources/development/tls/custom-ca.pem
+export OPENDUT_DISABLE_PRIVATE_NETWORK=true
+vagrant provision
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="theo-setup-in-docker"><a class="header" href="#theo-setup-in-docker">THEO Setup in Docker</a></h1>
+<h2 id="requirements-2"><a class="header" href="#requirements-2">Requirements</a></h2>
+<ul>
+<li>
+<p>Install Docker</p>
+<p><em>Ubuntu / Debian</em></p>
+<pre><code class="language-sh">sudo apt install docker.io
+</code></pre>
+<p>On most other Linux distributions, the package is called <code>docker</code>.</p>
+</li>
+<li>
+<p>Install Docker Compose v2</p>
+<p><em>Ubuntu / Debian</em></p>
+<pre><code class="language-sh">sudo apt install docker-compose-v2
+</code></pre>
+<p>Alternatively, see <a href="https://docs.docker.com/compose/install/linux/">https://docs.docker.com/compose/install/linux/</a>.</p>
+</li>
+<li>
+<p>Add your user into the <code>docker</code> group, to be allowed to use Docker commands without root permissions. (Mind that this has security implications.)</p>
+<pre><code class="language-sh">sudo groupadd docker  # create `docker` group, if it does not exist
+sudo gpasswd --add $USER docker  # add your user to the `docker` group
+newgrp docker  # attempt to activate group without re-login
+</code></pre>
+<p>You may need to log out your user account and log back in for this to take effect.</p>
+</li>
+<li>
+<p>Create a distribution of openDuT</p>
+</li>
+</ul>
+<pre><code class="language-sh">cargo ci distribution
+</code></pre>
+<ul>
+<li>Start containers</li>
+</ul>
+<pre><code>cargo theo testenv start
+</code></pre>
+<ul>
+<li>Start edgar cluster</li>
+</ul>
+<pre><code>cargo theo testenv edgar start
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="use-virtual-machine-for-development"><a class="header" href="#use-virtual-machine-for-development">Use virtual machine for development</a></h1>
+<p><img src="development/testenv/..%2F..%2F..%2F..%2Fresources%2Fdiagrams%2Fopendut-vm-development.drawio.svg" alt="OpenDuT-VM" /></p>
+<ul>
+<li>
+<p>Start vagrant on <strong>host</strong>: <code>cargo theo vagrant up</code></p>
+</li>
+<li>
+<p>Connect to virtual machine from <strong>host</strong>: <code>cargo theo vagrant ssh</code></p>
+</li>
+<li>
+<p>Start developer test mode in <strong>opendut-vm</strong>: <code>cargo theo dev start</code></p>
+</li>
+<li>
+<p>Once keycloak and netbird are provisioned, generate run configuration for CARL
+in <strong>opendut-vm</strong>:
+<code>cargo theo dev carl-config</code></p>
+<ul>
+<li>which should give an output similar to the following:</li>
+</ul>
+</li>
+</ul>
+<pre><code>OPENDUT_CARL_NETWORK_REMOTE_HOST=carl
+OPENDUT_CARL_NETWORK_REMOTE_PORT=443
+OPENDUT_CARL_VPN_ENABLED=true
+OPENDUT_CARL_VPN_KIND=netbird
+OPENDUT_CARL_VPN_NETBIRD_URL=https://192.168.56.10/api
+OPENDUT_CARL_VPN_NETBIRD_CA=&lt;ca_certificate_filepath&gt;
+OPENDUT_CARL_VPN_NETBIRD_AUTH_SECRET=&lt;dynamic_api_secret&gt;
+OPENDUT_CARL_VPN_NETBIRD_AUTH_TYPE=personal-access-token
+OPENDUT_CARL_VPN_NETBIRD_AUTH_HEADER=Authorization
+</code></pre>
+<ul>
+<li>You may also use the toml configuration (also printed from the <code>carl-config</code> command) file in a special configuration file on your host at <code>~/.config/opendut/carl/config.toml</code>.</li>
+<li>Use the environment variables in the run configuration for CARL
+<ul>
+<li>Run CARL on the <strong>host</strong>: <code>cargo ci carl run</code> </li>
+<li>Run LEA on the <strong>host</strong>: <code>cargo ci lea run</code> </li>
+</ul>
+</li>
+<li>Or start CARL in your IDE of choice and add the environment variables to the run configuration.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="use-virtual-machine-for-testing"><a class="header" href="#use-virtual-machine-for-testing">Use virtual machine for testing</a></h1>
+<p>This mode is used to test a distribution of OpenDuT. </p>
+<p><img src="development/testenv/..%2F..%2F..%2F..%2Fresources%2Fdiagrams%2Fopendut-vm-user.drawio.svg" alt="OpenDuT-VM" /></p>
+<ul>
+<li>
+<p>Ensure a distribution of openDuT is present</p>
+<ul>
+<li>By either creating one yourself on your <strong>host</strong>:
+<pre><code class="language-shell">cargo ci distribution
+</code></pre>
+</li>
+<li>Or in the <strong>opendut-vm</strong>. 
+Within the VM the rust target directory is overridden to <code>/home/vagrant/rust-target</code>.
+Therefore, you need the to copy the created distribution to the expected location.
+<pre><code class="language-shell">cargo ci distribution
+mkdir -p /vagrant/target/ci/distribution/x86_64-unknown-linux-gnu/
+cp ~/rust-target/ci/distribution/x86_64-unknown-linux-gnu/* /vagrant/target/ci/distribution/x86_64-unknown-linux-gnu/
+</code></pre>
+</li>
+<li>Or by copying one to the target directory <code>target/ci/distribution/x86_64-unknown-linux-gnu/</code>
+<pre><code class="language-sh"># ensure directory is present
+mkdir -p target/ci/distribution/x86_64-unknown-linux-gnu/
+# copy distribution to target directory
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Login to the virtual machine from your <strong>host</strong> (assumes you have already set up the virtual machine)</p>
+<pre><code class="language-shell">cargo theo vagrant ssh
+</code></pre>
+</li>
+<li>
+<p>Start test environment in <strong>opendut-vm</strong>:</p>
+<pre><code class="language-shell">cargo theo testenv start
+</code></pre>
+</li>
+<li>
+<p>Start a cluster in <strong>opendut-vm</strong>:</p>
+<pre><code class="language-shell">cargo theo testenv edgar start
+</code></pre>
+<p>This will start several EDGAR containers and create an OpenDuT cluster. </p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="known-issues"><a class="header" href="#known-issues">Known Issues</a></h1>
+<h2 id="copying-data-to-and-from-the-opendut-browser"><a class="header" href="#copying-data-to-and-from-the-opendut-browser">Copying data to and from the OpenDuT Browser</a></h2>
+<p>The OpenDuT Browser is a web browser running in a docker container. 
+It is based on KasmVNC base image which allows containerized desktop applications from a web browser.
+When using the OpenDuT Browser, you may want to copy data to and from the OpenDuT browser inside your own browser.
+On Firefox this is restricted, and you may use the clipboard window on the left side of the OpenDuT Browser to copy data to your clipboard.</p>
+<h2 id="cargo-target-directory"><a class="header" href="#cargo-target-directory">Cargo Target Directory</a></h2>
+<p>When running cargo tasks within the virtual machine, you may see following error:</p>
+<pre><code>warning: hard linking files in the incremental compilation cache failed. copying files instead. consider moving the cache directory to a file system which supports hard linking in session dir
+</code></pre>
+<p>This is mitigated by setting a different target directory for cargo in <code>/home/vagrant/.bashrc</code> on the virtual machine:</p>
+<pre><code>export CARGO_TARGET_DIR=$HOME/rust-target
+</code></pre>
+<h2 id="vagrant-permission-denied"><a class="header" href="#vagrant-permission-denied">Vagrant Permission Denied</a></h2>
+<p>Sometimes vagrant fails to insert the private key that was automatically generated.
+This might cause this error (seen in git-bash on Windows):</p>
+<pre><code>$ vagrant ssh
+vagrant@127.0.0.1: Permission denied (publickey).
+</code></pre>
+<p>This can be fixed by overwriting the vagrant-generated key with the one inserted during provisioning:</p>
+<pre><code class="language-sh">cp ~/.ssh/id_rsa .vagrant/machines/opendut-vm/virtualbox/private_key
+</code></pre>
+<h2 id="vagrant-timeout"><a class="header" href="#vagrant-timeout">Vagrant Timeout</a></h2>
+<p>If the virtual machine is not allowed to create or use a private network it may cause a timeout during booting the virtual machine.</p>
+<pre><code>Timed out while waiting for the machine to boot. This means that
+Vagrant was unable to communicate with the guest machine within
+the configured (&quot;config.vm.boot_timeout&quot; value) time period.
+</code></pre>
+<ul>
+<li>You may disable the private network by setting the environment variable <code>OPENDUT_DISABLE_PRIVATE_NETWORK=true</code> and explicitly halt and start the virtual machine again.</li>
+</ul>
+<pre><code class="language-shell">export OPENDUT_DISABLE_PRIVATE_NETWORK=true
+vagrant halt
+vagrant up
+</code></pre>
+<h2 id="vagrant-custom-certificate-authority"><a class="header" href="#vagrant-custom-certificate-authority">Vagrant Custom Certificate Authority</a></h2>
+<p>When running behind an intercepting http proxy, you may run into issues with SSL certificate verification. </p>
+<pre><code class="language-shell">ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1007)
+</code></pre>
+<p>This can be mitigated by adding the custom certificate authority to the trust store of the virtual machine. </p>
+<ul>
+<li>Place certificate authority file here: <code>resources/development/tls/custom-ca.crt</code></li>
+<li>And re-run the provisioning of the virtual machine.</li>
+</ul>
+<pre><code class="language-shell">export CUSTOM_ROOT_CA=resources/development/tls/custom-ca.pem
+vagrant provision
+</code></pre>
+<h2 id="ctrlc-in-vagrant-ssh"><a class="header" href="#ctrlc-in-vagrant-ssh">Ctrl+C in Vagrant SSH</a></h2>
+<p>When using <code>cargo theo vagrant ssh</code> on Windows and pressing <code>Ctrl+C</code> to terminate a command, the ssh session may be closed.</p>
+<h2 id="netbird-management-invalid-credentials"><a class="header" href="#netbird-management-invalid-credentials">Netbird management invalid credentials</a></h2>
+<p>If keycloak was re-provisioned after the netbird management server, 
+the management server may not be able to authenticate with keycloak anymore.</p>
+<pre><code># docker logs netbird-management-1
+[...]
+2024-02-14T09:51:57Z WARN management/server/account.go:1174: user 59896d1b-45e6-48bb-ae79-aa17d5a2af94 not found in IDP
+2024-02-14T09:51:57Z ERRO management/server/http/middleware/access_control.go:46: failed to get user from claims: failed to get account with token claims user 59896d1b-45e6-48bb-ae79-aa17d5a2af94 not found in the IdP
+
+docker logs edgar-leader
+[...]
+Failed to create new peer.
+[...]
+  Received status code indicating an error: HTTP status client error (403 Forbidden) for url (http://netbird-management/api/groups)
+</code></pre>
+<p>This may be fixed by destroying the netbird service:</p>
+<pre><code class="language-shell">cargo theo testenv destroy --service netbird
+</code></pre>
+<p>Afterward you may restart the netbird service:</p>
+<pre><code class="language-shell">cargo theo testenv start
+# or 
+cargo theo dev start
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced-usage"><a class="header" href="#advanced-usage">Advanced Usage</a></h1>
+<p>Run vagrant commands directly instead of through THEO:</p>
+<ul>
+<li>or directly via Vagrant's cli (bash commands run from the root of the repository):
+<pre><code>export OPENDUT_REPO_ROOT=$(git rev-parse --show-toplevel)
+export VAGRANT_DOTFILE_PATH=$OPENDUT_REPO_ROOT/.vagrant
+export VAGRANT_VAGRANTFILE=$OPENDUT_REPO_ROOT/.ci/docker/Vagrantfile
+vagrant up
+</code></pre>
+</li>
+<li>provision vagrant with desktop environment
+<pre><code>ANSIBLE_SKIP_TAGS=&quot;&quot; vagrant provision
+</code></pre>
+</li>
+</ul>
+<h2 id="cross-compile-theo-for-windows-on-linux"><a class="header" href="#cross-compile-theo-for-windows-on-linux">Cross compile THEO for Windows on Linux</a></h2>
+<pre><code>cross build --release --target x86_64-pc-windows-gnu --bin opendut-theo
+# will place binary here
+target/x86_64-pc-windows-gnu/release/opendut-theo.exe
+</code></pre>
+<h2 id="custom-certificate-authority"><a class="header" href="#custom-certificate-authority">Custom Certificate Authority</a></h2>
+<p>This section shall provide information on how to
+provision the virtual machine when running behind an intercepting http proxy.
+This is also used in the docker containers to trust the custom certificate authority.
+All certificate authorities matching the following path will be trusted in the docker container:
+<code>./resources/development/tls/*-ca.pem</code>.</p>
+<p>The following step needs to be done before provisioning the virtual machine.</p>
+<ul>
+<li>Place certificate authority file here: <code>resources/development/tls/custom-ca.crt</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="secrets-for-test-environment"><a class="header" href="#secrets-for-test-environment">Secrets for test environment</a></h1>
+<p>This repository contains secrets for testing purposes. 
+These secrets are not supposed to be used in a production environment.
+There are two formats defined in the repository that document their location:</p>
+<ul>
+<li>~/.gitguardian.yml</li>
+<li>.secretscanner-false-positives.json</li>
+</ul>
+<p>Alternative strategy to avoid this:
+auto-generate secrets during test environment setup.</p>
+<h2 id="gitguardian"><a class="header" href="#gitguardian">GitGuardian</a></h2>
+<h3 id="getting-started-with-ggshield"><a class="header" href="#getting-started-with-ggshield">Getting started with ggshield</a></h3>
+<ul>
+<li>Install ggshield
+<pre><code class="language-shell">sudo apt install -y python3-pip
+pip install ggshield
+export PATH=~/.local/bin/:$PATH
+</code></pre>
+</li>
+<li>Login to https://dashboard.gitguardian.com</li>
+<li>Either use PAT or service account (https://docs.gitguardian.com/api-docs/service-accounts)</li>
+<li>Goto API -&gt; Personal access tokens
+<ul>
+<li>and create a token</li>
+</ul>
+</li>
+<li>Use API token to login: <code>ggshield auth login --method token</code></li>
+</ul>
+<h3 id="scan-repository"><a class="header" href="#scan-repository">Scan repository</a></h3>
+<ul>
+<li>
+<p>See https://docs.gitguardian.com/ggshield-docs/getting-started</p>
+</li>
+<li>
+<p>Scan repo</p>
+<pre><code class="language-shell">ggshield secret scan repo ./
+</code></pre>
+</li>
+<li>
+<p>Ignore secrets found in last run and remove them or document them in <code>.gitguardian.yml</code></p>
+<pre><code class="language-shell">ggshield secret ignore --last-found
+</code></pre>
+</li>
+<li>
+<p>Review changes in <code>.gitguardian.yml</code> and commit</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p><img src="architecture/img/overview.excalidraw.svg" alt="overview.excalidraw.svg" /></p>
+<h3 id="components"><a class="header" href="#components">Components</a></h3>
+<ul>
+<li><strong>CARL</strong> (Control And Registration Logic)</li>
+<li><strong>EDGAR</strong> (Edge Device Global Access Router)</li>
+<li><strong>LEA</strong> (Leasing ECU Access)</li>
+<li><strong>CLEO</strong> (Command-Line ECU Orchestrator)</li>
+<li><strong>DUT</strong> (Device under test)</li>
+</ul>
+<h1 id="functional-description"><a class="header" href="#functional-description">Functional description</a></h1>
+<p>openDuT provisions an end-to-end encrypted private network between <strong>Devices under Test</strong> (DuT), Test Execution Engines, RestBus simulations, and other devices.
+To achieve this, openDuT uses <strong>Edge Device Global Access Router</strong> (EDGAR),
+which can tunnel the Ethernet traffic (Layer 2) of the connected devices into the openDuT network using <strong>Generic Routing Encapsulation</strong> (GRE). CAN traffic is tunnelled between EDGAR instances using <a href="https://github.com/mguentner/cannelloni">cannelloni</a>.
+EDGAR registers with the <strong>Control and Registration Logic</strong> (CARL) and reports the type and status of its connected devices.
+Multiple EDGARs can be linked to clusters via the graphical <strong>Leasing ECU Access</strong> (LEA) UI or the <strong>Command-Line ECU Orchestrator</strong> (CLEO) of CARL,
+and the openDuT cluster can be provisioned for the user.</p>
+<p><img src="architecture/img/opendut-functional-diagram.svg" alt="opendut-functional-diagram.svg" /></p>
+<p>openDuT uses NetBird technology and provides its own NetBird server, including a TURN server in CARL and NetBird clients in the EDGARs.
+The NetBird clients of the clustered EDGARs automatically build a WireGuard network in star topology.
+If a direct connection between two EDGARs is not possible, the tunnel is routed through the TURN server in CARL.</p>
+<p><img src="architecture/img/edgar-bridging.excalidraw.svg" alt="edgar-gre-bridging.excalidraw.svg" /></p>
+<p>Within EDGAR, the openDUT ETH Bridge manages Ethernet communication and routes outgoing packets to the GRE-Bridge(s).
+The GRE-Bridges encapsulate the packets and send them over fixed-assigned sources to fixed-assigned targets.
+When encapsulating, GRE writes the source and header information and the protocol type of the data packet into the GRE header of the packet.
+This offers the following advantages: different protocol types can be sent, network participants can be in the same subnet, and multiple VLANs can be transmitted through a single WireGuard tunnel.</p>
+<p>CAN interfaces on EDGAR are connected by means of the openDUT CAN Bridge, which is effectively a virtual CAN interface connected to the individual interfaces by means of <code>can-gw</code> rules. Between the leading EDGAR and each other EDGAR, a cannelloni tunnel is established, linking the CAN bridges of different EDGAR instances together.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cluster"><a class="header" href="#cluster">Cluster</a></h1>
+<h2 id="clusterstate"><a class="header" href="#clusterstate">ClusterState</a></h2>
+<p><img src="architecture/cluster/../../mdbook-plantuml-img/847199bf3ba7d7e72d0c716ae0697ce530ff1e87.svg" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cluster-1"><a class="header" href="#cluster-1">Cluster</a></h1>
+<h2 id="cluster-creation"><a class="header" href="#cluster-creation">Cluster Creation</a></h2>
+<pre><code>message ClusterConfiguration {
+  ClusterId id = 1;
+  ClusterName name = 2;
+  opendut.types.peer.PeerId leader = 3;
+  repeated opendut.types.topology.DeviceId devices = 4;
+}
+</code></pre>
+<h2 id="cluster-deployment"><a class="header" href="#cluster-deployment">Cluster Deployment</a></h2>
+<pre><code>message ClusterAssignment {
+  ClusterId id = 1;
+  opendut.types.peer.PeerId leader = 3;
+  repeated PeerClusterAssignment assignments = 4;
+}
+</code></pre>
+<pre><code>message PeerClusterAssignment {
+  opendut.types.peer.PeerId peer_id = 1;
+  opendut.types.util.IpAddress vpn_address = 2;
+  repeated opendut.types.util.NetworkInterfaceName device_interfaces = 3;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="peer"><a class="header" href="#peer">Peer</a></h1>
+<h2 id="peerstate"><a class="header" href="#peerstate">PeerState</a></h2>
+<p><img src="architecture/peer/../../mdbook-plantuml-img/fb6687bd6d03cfedae1f2a5dfc059fc9e545f104.svg" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

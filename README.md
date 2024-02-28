@@ -1,1 +1,4 @@
-# eclipse-opendut.github.io
+# Eclipse openDuT
+
+[Documentation](/book/index.html)
+
