@@ -1,4 +1,4 @@
-# Eclipse openDuT
+# Eclipse openDuT Project Page
 
-[Documentation](/book/index.html)
+Webpage for the Eclipse openDuT project.
 
